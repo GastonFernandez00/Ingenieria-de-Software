@@ -1,14 +1,16 @@
-# SnakeGame-Java
-Juego clásico de Snake desarrollado en Java con el IDE Eclipse. <img src="img/snake_gif.gif" width="360" align="right" style="margin:10px" />
+# TP de Ingeniería de Software: Snake.
 
-Video : https://youtu.be/OZe4mcL8sxA
+#### Profesores:
++ Figueroa, Sergio
++ Páez, Danilo
 
-Para este proyecto se hizo uso de :
-- Clase Graphic.
-- Clase Math.
-- POO.
-- Thread (Hilos).
-- Logica basica (condicionales, bucles, contadores y acumuladores etc.)
+#### Integrantes:
++ Fernández, Gastón Emanuel
++ Guimpelevich, Maria Luján
++ Trujillo, David
++ Venecia, Milagros Ailín
+
+ +<img src="img/snake_gif.gif" width="360" align="right" style="margin:10px" />
 
 Acerca del Juego:
 - Se mueve con las teclas A,W,S,D.
