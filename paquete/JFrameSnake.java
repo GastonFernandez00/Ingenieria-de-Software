@@ -12,6 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.Toolkit;
@@ -22,13 +24,25 @@ public class JFrameSnake extends JFrame implements KeyListener {
 	public PanelSnake snake;
 	private JLabel lblNewLabel;
 	public static JLabel lblPuntaje;
+	private Menu menu;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					Menu menu = new Menu();
 					JFrameSnake frame = new JFrameSnake();
-					frame.setVisible(true);
+
+					int opcion = menu.getOpcion(); //guardo la opcion que me da en una variable
+
+					//pregunto cual es la opcion y pongo el modo de juego seleccionado
+
+					if(opcion == 0){
+						frame.setVisible(true);
+					}else{
+						JOptionPane.showMessageDialog(null, "No se puede seleccionar");
+					}
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -41,7 +55,7 @@ public class JFrameSnake extends JFrame implements KeyListener {
 	 */
 	public JFrameSnake() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(JFrameSnake.class.getResource("/img/snake.png")));
-		setTitle("Snake_Basilio");
+		setTitle("Snake - Game");
 		addKeyListener(this);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 575, 645);
@@ -49,6 +63,8 @@ public class JFrameSnake extends JFrame implements KeyListener {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+
+
 		
 		/** Panel Principal ----------------------------------------------------- */
 		JPanel panelPrincipal = new JPanel();
@@ -87,6 +103,18 @@ public class JFrameSnake extends JFrame implements KeyListener {
 		panelPrincipal.add(lblPuntaje);
 		
 	}
+/*
+	   private int PanelDeOpciones(){
+
+		String b[] = {"Normal","Contrarreloj","Con Bordes"};
+		return JOptionPane.showOptionDialog(null, this, "Opciones - Snake",
+		 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, b,null);
+
+
+	   }
+
+ */
+
 	/** Boton para avanzar **/
 
 	public void keyPressed(KeyEvent e) { // Evento en el JFrame
@@ -131,5 +159,3 @@ public class JFrameSnake extends JFrame implements KeyListener {
 
 
 
-
-// aa
