@@ -9,6 +9,27 @@
             "name": "JFrameSnake",
             "request": "launch",
             "mainClass": "paquete.JFrameSnake",
+            "projectName": "00Trabajo_3f67c0cc"
+        },
+        {
+            "type": "java",
+            "name": "JFrameSnake",
+            "request": "launch",
+            "mainClass": "JFrameSnake",
+            "projectName": "00Trabajo_3f67c0cc"
+        },
+        {
+            "type": "java",
+            "name": "Menu",
+            "request": "launch",
+            "mainClass": "Menu",
+            "projectName": "00Trabajo_3f67c0cc"
+        },
+        {
+            "type": "java",
+            "name": "JFrameSnake",
+            "request": "launch",
+            "mainClass": "paquete.JFrameSnake",
             "projectName": "Trabajo_ecad040c"
         },
         {
