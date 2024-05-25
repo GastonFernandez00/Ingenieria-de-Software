@@ -30,18 +30,8 @@ public class JFrameSnake extends JFrame implements KeyListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Menu menu = new Menu();
+					
 					JFrameSnake frame = new JFrameSnake();
-
-					int opcion = menu.getOpcion(); //guardo la opcion que me da en una variable
-
-					//pregunto cual es la opcion y pongo el modo de juego seleccionado
-
-					if(opcion == 0){
-						frame.setVisible(true);
-					}else{
-						JOptionPane.showMessageDialog(null, "No se puede seleccionar");
-					}
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -54,6 +44,10 @@ public class JFrameSnake extends JFrame implements KeyListener {
 	 * Create the frame.
 	 */
 	public JFrameSnake() {
+		Contrarreloj contrarreloj;
+		Menu menu = new Menu();
+		int opcion = menu.getOpcion(); //guardo la opcion que me da en una variable
+
 		setIconImage(Toolkit.getDefaultToolkit().getImage(JFrameSnake.class.getResource("/img/snake.png")));
 		setTitle("Snake - Game");
 		addKeyListener(this);
@@ -100,6 +94,20 @@ public class JFrameSnake extends JFrame implements KeyListener {
 		lblPuntaje.setFont(new Font("Consolas", Font.BOLD, 22));
 		lblPuntaje.setBounds(458, 15, 27, 20);
 		panelPrincipal.add(lblPuntaje);
+
+		//pregunto cual es la opcion y pongo el modo de juego seleccionado
+
+		switch (opcion) {
+			case 0:
+				setVisible(true);
+				break;
+			case 1:
+				contrarreloj = new Contrarreloj(panelPrincipal);
+				setVisible(true);
+			case 2:
+				JOptionPane.showMessageDialog(null, "No se puede seleccionar");
+				break;
+		}
 		
 	}
 /*
