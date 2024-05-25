@@ -20,7 +20,11 @@ public class Menu extends javax.swing.JFrame{
         String B[] = {"Normal","Contrarreloj","Con Bordes"};
         this.opcion = JOptionPane.showOptionDialog(this, "Opciones para Iniciar el Juego", "Opciones - Snake",
          JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE, null, B, accessibleContext);
-        JOptionPane.showMessageDialog(this, "Opción seleccionada: "+B[opcion]);
+
+       // JOptionPane.showMessageDialog(this, "Opción seleccionada: "+B[opcion]);
+
+
+
     }
 
     public int getOpcion(){ return this.opcion; }

@@ -30,8 +30,19 @@ public class JFrameSnake extends JFrame implements KeyListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					Menu menu = new Menu();
 					JFrameSnake frame = new JFrameSnake();
-					frame.setVisible(true);
+
+					int opcion = menu.getOpcion(); //guardo la opcion que me da en una variable
+
+					//pregunto cual es la opcion y pongo el modo de juego seleccionado
+
+					if(opcion == 0){
+						frame.setVisible(true);
+					}else{
+						JOptionPane.showMessageDialog(null, "No se puede seleccionar");
+					}
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -53,9 +64,6 @@ public class JFrameSnake extends JFrame implements KeyListener {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		/* Panel de Opciones  */
-		menu = new Menu();
-		menu.getOpcion();
 		
 		/** Panel Principal ----------------------------------------------------- */
 		JPanel panelPrincipal = new JPanel();
@@ -94,13 +102,17 @@ public class JFrameSnake extends JFrame implements KeyListener {
 		panelPrincipal.add(lblPuntaje);
 		
 	}
+/*
+	   private int PanelDeOpciones(){
 
-	private int PanelDeOpciones(){
 		String b[] = {"Normal","Contrarreloj","Con Bordes"};
 		return JOptionPane.showOptionDialog(null, this, "Opciones - Snake",
 		 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, b,null);
-	}
 
+
+	   }
+
+ */
 
 	/** Boton para avanzar **/
 
@@ -146,5 +158,3 @@ public class JFrameSnake extends JFrame implements KeyListener {
 
 
 
-
-// aa
