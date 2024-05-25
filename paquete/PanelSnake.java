@@ -2,6 +2,7 @@ package paquete;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,9 +11,11 @@ import javax.swing.JPanel;
 
 public class PanelSnake extends JPanel {
 
-	int tam;  // --> tamaño del lado del panel en pixeles
+	int lastEpoch = (int)Instant.now().getEpochSecond();
+
+	int tam;  // --> tamaï¿½o del lado del panel en pixeles
 	int cant; // --> cantidad de cuadrados por lado
-	int tamC; // --> tamaño de cada cuadrado en pixeles
+	int tamC; // --> tamaï¿½o de cada cuadrado en pixeles
 	
 	List<int[]> snake = new ArrayList<>(); // --> SNAKE
 	int[] comida = new int [2];  // ------------> COMIDA
@@ -30,7 +33,7 @@ public class PanelSnake extends JPanel {
 		this.tam = tam;
 		this.cant = cant;
 		this.tamC = tam / cant;
-		// Creamos dos pares ordenados que será el snake y se lo agregamos
+		// Creamos dos pares ordenados que serï¿½ el snake y se lo agregamos
 		inicioSnake();
 		
 		generarComida();
@@ -97,7 +100,12 @@ public class PanelSnake extends JPanel {
 		
 		/** Busca si la nueva pocision pertenece a la pocision de la serpiente (perdiste) o sino avanza**/
 		boolean existe = false;
+		boolean termino = false;
 		
+		if(Modos.timer.getTiempoInicial() == Modos.timer.getTiempoFinal()){
+			termino = true;
+		} 
+
 		for(int i = 0; i<snake.size(); i++) {
 			if(newHeadSnake[0]==snake.get(i)[0] && newHeadSnake[1]==snake.get(i)[1] ) {
 				existe = true;
@@ -105,10 +113,12 @@ public class PanelSnake extends JPanel {
 			}
 		}
 		
-		if(existe) { // Si existe, te chocaste contigo mismo, y se reinicia el snake y el puntaje
+	if(existe || termino) { // Si existe, te chocaste contigo mismo, y se reinicia el snake y el puntaje
 			JOptionPane.showMessageDialog(this, "GameOver");
 			inicioSnake();
 			JFrameSnake.lblPuntaje.setText(""+puntaje);
+			Modos.timer.reiniciarTimer();
+			Modos.lblTiempo.setText(""+Modos.timer.getInicial());
 			
 		}else {   // Si no existe, puede ser la comida o espacio vacio
 			if(newHeadSnake[0]==comida[0] && newHeadSnake[1]==comida[1]) {
@@ -122,8 +132,24 @@ public class PanelSnake extends JPanel {
 				snake.remove(0);
 			}
 		}
+
+		
+		if(calcTiempo() == true){
+			Modos.timer.modificarTiempo();
+			Modos.lblTiempo.setText(""+Modos.timer.getInicial());
+		}
 	}
 	
+	public boolean calcTiempo(){
+		int newEpoc = (int)Instant.now().getEpochSecond();
+		int aumento = newEpoc - lastEpoch;
+		if(aumento < 1){
+			return false;
+		}
+		lastEpoch = newEpoc;
+		return true;
+	}
+
 	public void cambiarDireccion(String newDir) {
 		
 		if( (this.dirActual.equals("de") || this.dirActual.equals("iz")) && (newDir.equals("ar") || newDir.equals("ab")))

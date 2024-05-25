@@ -6,12 +6,12 @@ import javax.swing.JPanel;
 
 public abstract class Modos {
     
-    Timer timer;
+    static Timer timer;
     private JLabel lblNewLabelTiempo;
 	public static JLabel lblTiempo;
     
     Modos(JPanel panelPrincipal,Timer timer){
-        establecerTimer(timer);
+        Modos.timer = timer;
         lblNewLabelTiempo = new JLabel("Tiempo :");
 		lblNewLabelTiempo.setFont(new Font("Consolas", Font.BOLD, 22));
 		lblNewLabelTiempo.setBounds(30, 15, 119, 20);
@@ -21,11 +21,6 @@ public abstract class Modos {
 		lblTiempo.setFont(new Font("Consolas", Font.BOLD, 22));
 		lblTiempo.setBounds(130, 15, 40, 20);
 		panelPrincipal.add(lblTiempo);
-
-    }
-
-    void establecerTimer(Timer timer){
-        this.timer = timer;
     }
 
     // void establecerBarreras(Barreras barr){
