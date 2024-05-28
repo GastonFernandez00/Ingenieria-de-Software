@@ -100,8 +100,9 @@ public class PanelSnake extends JPanel {
 		
 		/** Busca si la nueva pocision pertenece a la pocision de la serpiente (perdiste) o sino avanza**/
 		boolean existe = false;
+
+		/* Determina si se alcanzó el tiempo límite */
 		boolean termino = false;
-		
 		if(Modos.timer.getTiempoInicial() == Modos.timer.getTiempoFinal()){
 			termino = true;
 		} 
@@ -113,14 +114,17 @@ public class PanelSnake extends JPanel {
 			}
 		}
 		
-	if(existe || termino) { // Si existe, te chocaste contigo mismo, y se reinicia el snake y el puntaje
+		/*	Si existe, te chocaste contigo mismo, y se reinicia el snake y el puntaje
+		* 	Si termino el tiempo, se reinicia el snake y el puntaje
+		*/
+		if(existe || termino) { 
 			JOptionPane.showMessageDialog(this, "GameOver");
 			inicioSnake();
 			JFrameSnake.lblPuntaje.setText(""+puntaje);
 			Modos.timer.reiniciarTimer();
 			Modos.lblTiempo.setText(""+Modos.timer.getInicial());
 			
-		}else {   // Si no existe, puede ser la comida o espacio vacio
+		}else {   // Si no existe ni terminó, puede ser la comida o espacio vacio
 			if(newHeadSnake[0]==comida[0] && newHeadSnake[1]==comida[1]) {
 				snake.add(newHeadSnake);
 				generarComida();
@@ -133,13 +137,20 @@ public class PanelSnake extends JPanel {
 			}
 		}
 
-		
+		/*
+		 * Pregunta si pasó un segundo para actualizar el tiempo
+		 */
 		if(calcTiempo() == true){
 			Modos.timer.modificarTiempo();
 			Modos.lblTiempo.setText(""+Modos.timer.getInicial());
 		}
 	}
 	
+
+	/* 
+	 * Método que calcula el tiempo transcurrido desde el último segundo.
+	 * Si ha pasado un segundo, retorna true.
+	 */
 	public boolean calcTiempo(){
 		int newEpoc = (int)Instant.now().getEpochSecond();
 		int aumento = newEpoc - lastEpoch;
