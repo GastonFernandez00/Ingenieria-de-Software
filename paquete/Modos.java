@@ -32,6 +32,9 @@ public abstract class Modos {
 		panelPrincipal.add(lblTiempo);
     }
 
+    public abstract String getTipo();
+
+
     // void establecerBarreras(Barreras barr){
     //     this.barr = barr;
     // }

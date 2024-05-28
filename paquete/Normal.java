@@ -14,4 +14,8 @@ public class Normal extends Modos {
     public Normal(JPanel panelPrincipal){
         super(panelPrincipal,new TimerAscendente());
     }
+
+    public String getTipo(){
+        return "Normal";
+    }
 }

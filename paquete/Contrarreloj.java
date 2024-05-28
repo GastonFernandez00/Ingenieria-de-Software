@@ -24,4 +24,9 @@ public class Contrarreloj extends Modos {
     public Contrarreloj(JPanel panelPrincipal,int TiempoInicial){
         super(panelPrincipal,new TimerDescendente(TiempoInicial));
     }
+
+    public String getTipo(){
+        return "Contrarreloj";
+    }
+
 }
