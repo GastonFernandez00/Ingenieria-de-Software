@@ -44,6 +44,7 @@ public class JFrameSnake extends JFrame implements KeyListener {
 	 * Create the frame.
 	 */
 	public JFrameSnake() {
+		Modos modo;
 		Menu menu = new Menu();
 		int opcion = menu.getOpcion(); //guardo la opcion que me da en una variable
 
@@ -98,11 +99,11 @@ public class JFrameSnake extends JFrame implements KeyListener {
 
 		switch (opcion) {
 			case 0:
-				new Normal(panelPrincipal);
+				modo = new Normal(panelPrincipal);
 				setVisible(true);
 				break;
 			case 1:
-				new Contrarreloj(panelPrincipal);
+				modo = new Contrarreloj(panelPrincipal);
 				setVisible(true);
 				break;
 			case 2:

@@ -1,8 +1,10 @@
 package paquete;
 
+import java.awt.Color;
+
 public abstract class Comidas {
-    String tipo = "";
-    PowerUp powerup;
+    private String tipo = "";
+    private PowerUp powerup;
     Comidas(PowerUp _powerup){
         powerup = _powerup;
         tipo = _powerup.getTipo();
@@ -10,4 +12,17 @@ public abstract class Comidas {
     public void crear(){
     
     }
+
+    public int getMultiplicador(){
+        return powerup.getMultiplicarPuntaje();
+    }
+
+    public String getTipo(){
+        return tipo;
+    }
+
+    public Color getColor(){
+        return powerup.getColor();
+    }
+
 }

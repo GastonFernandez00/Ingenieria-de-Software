@@ -1,5 +1,7 @@
 package paquete;
 
+import java.awt.Color;
+
 /**
  * PowerUp
  */
@@ -14,6 +16,8 @@ public interface PowerUp {
     public int getMultiplicarPuntaje();
 
     public int getmodificarTiempo();
+
+    public Color getColor();
 
     
     

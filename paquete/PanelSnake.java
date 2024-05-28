@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -19,6 +20,7 @@ public class PanelSnake extends JPanel {
 	
 	List<int[]> snake = new ArrayList<>(); // --> SNAKE
 	int[] comida = new int [2];  // ------------> COMIDA
+	Comidas tipoDeComida = new CRoja();
 	
 	String dirActual = "de"; // --> Direccion a donde se esta moviendo el snake
 	String dirNueva = "de";   // --> Nueva Direccion que apretemos
@@ -55,8 +57,12 @@ public class PanelSnake extends JPanel {
 			dibujo.fillRect(par[0]*tamC, par[1]*tamC, tamC-1, tamC-1);
 		}
 		// Dibujando la comida : esta compuesto de 4 cuadratitos (cube)
+		pintarComida(dibujo);
+	}
+
+	public void pintarComida(Graphics dibujo){
 		int cube = tamC/3;
-		dibujo.setColor(new Color(0, 1, 0));
+		dibujo.setColor(tipoDeComida.getColor());
 		dibujo.fillRect((comida[0]*tamC)+cube, comida[1]*tamC, cube, cube);
 		dibujo.fillRect((comida[0]*tamC), (comida[1]*tamC)+cube, cube, cube);
 		dibujo.fillRect((comida[0]*tamC)+2*cube, (comida[1]*tamC)+cube, cube, cube);
@@ -76,6 +82,23 @@ public class PanelSnake extends JPanel {
 			}
 		}
 		if(!existe) {
+			Random r = new Random();
+
+			if(r.nextInt(1,101) < 20){
+				int i = r.nextInt(1,3);
+				switch (i) {
+					case 1:
+						break;
+					default:
+						tipoDeComida = new CRoja();
+						break;
+				}
+
+			}
+			else{
+				tipoDeComida = new CNegra();
+			}
+			
 			this.comida[0] = x;
 			this.comida[1] = y;
 		}
@@ -103,6 +126,15 @@ public class PanelSnake extends JPanel {
 
 		/* Determina si se alcanzó el tiempo límite */
 		boolean termino = false;
+
+		boolean finalizaEfectoComida = false;
+		int contadorFinEfecto = 0;
+
+		if(finalizaEfectoComida == true){
+			tipoDeComida = new CNegra();
+			finalizaEfectoComida = false;
+		}
+
 		if(Modos.timer.getTiempoInicial() == Modos.timer.getTiempoFinal()){
 			termino = true;
 		} 
@@ -127,8 +159,9 @@ public class PanelSnake extends JPanel {
 		}else {   // Si no existe ni terminó, puede ser la comida o espacio vacio
 			if(newHeadSnake[0]==comida[0] && newHeadSnake[1]==comida[1]) {
 				snake.add(newHeadSnake);
+				producirEfectoComida();
 				generarComida();
-				puntaje++;
+				puntaje += tipoDeComida.getMultiplicador();
 				JFrameSnake.lblPuntaje.setText(""+puntaje);
 				
 			}else {
@@ -143,7 +176,17 @@ public class PanelSnake extends JPanel {
 		if(calcTiempo() == true){
 			Modos.timer.modificarTiempo();
 			Modos.lblTiempo.setText(""+Modos.timer.getInicial());
+			
+			contadorFinEfecto++;
+			if(contadorFinEfecto == 10){
+				finalizaEfectoComida = true;
+				contadorFinEfecto = 0;
+			}
 		}
+	}
+
+	private void producirEfectoComida(){
+		
 	}
 	
 
