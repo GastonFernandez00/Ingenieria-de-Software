@@ -10,7 +10,7 @@ import javax.swing.JPanel;
  */
 public abstract class Modos {
     
-    public static Timer timer;
+    static Timer timer = new TimerAscendente();
     private JLabel lblNewLabelTiempo;
 	public static JLabel lblTiempo;
     
