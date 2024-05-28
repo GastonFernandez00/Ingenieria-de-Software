@@ -14,6 +14,9 @@ public class PanelSnake extends JPanel {
 
 	int lastEpoch = (int)Instant.now().getEpochSecond();
 
+
+	boolean finalizaEfectoComida = false;
+	int contadorFinEfecto = 0;
 	int tam;  // --> tama�o del lado del panel en pixeles
 	int cant; // --> cantidad de cuadrados por lado
 	int tamC; // --> tama�o de cada cuadrado en pixeles
@@ -127,12 +130,11 @@ public class PanelSnake extends JPanel {
 		/* Determina si se alcanzó el tiempo límite */
 		boolean termino = false;
 
-		boolean finalizaEfectoComida = false;
-		int contadorFinEfecto = 0;
-
 		if(finalizaEfectoComida == true){
 			tipoDeComida = new CNegra();
 			finalizaEfectoComida = false;
+			//TODO: falta repintar el cuadro de comida
+			repaint();
 		}
 
 		if(Modos.timer.getTiempoInicial() == Modos.timer.getTiempoFinal()){
@@ -159,10 +161,10 @@ public class PanelSnake extends JPanel {
 		}else {   // Si no existe ni terminó, puede ser la comida o espacio vacio
 			if(newHeadSnake[0]==comida[0] && newHeadSnake[1]==comida[1]) {
 				snake.add(newHeadSnake);
-				producirEfectoComida();
-				generarComida();
 				puntaje += tipoDeComida.getMultiplicador();
 				JFrameSnake.lblPuntaje.setText(""+puntaje);
+				generarComida();
+				producirEfectoComida();
 				
 			}else {
 				snake.add(newHeadSnake);
@@ -177,11 +179,13 @@ public class PanelSnake extends JPanel {
 			Modos.timer.modificarTiempo();
 			Modos.lblTiempo.setText(""+Modos.timer.getInicial());
 			
-			contadorFinEfecto++;
-			if(contadorFinEfecto == 10){
+			if(!tipoDeComida.getTipo().equals("Normal")) contadorFinEfecto++;
+			else contadorFinEfecto = 0;
+			if(contadorFinEfecto == 5){ //Tiempo para poder conseguir la "fruta"
 				finalizaEfectoComida = true;
 				contadorFinEfecto = 0;
 			}
+			
 		}
 	}
 
