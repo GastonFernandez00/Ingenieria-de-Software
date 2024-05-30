@@ -109,6 +109,7 @@ public class JFrameSnake extends JFrame implements KeyListener {
 				setVisible(true);
 				break;
 			case 2:
+				fondo.setBarreras();
 				bordes = new ConBordes(panelPrincipal,snake);
 				setVisible(true);
 				break;

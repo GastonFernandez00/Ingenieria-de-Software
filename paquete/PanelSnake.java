@@ -191,7 +191,7 @@ public class PanelSnake extends JPanel {
 		dirActual = "de";
 		dirNueva = "de";
 		puntaje = 0;
-		generarComida();
+		generarComida(); //cuando empieza el juego se genera la comida
 	}
 
 	public void setBarreras(){
