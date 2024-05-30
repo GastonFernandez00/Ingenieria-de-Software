@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 public class PanelSnake extends JPanel {
 
+	boolean barreras = false;
 	int lastEpoch = (int)Instant.now().getEpochSecond();
 
 
@@ -74,9 +75,18 @@ public class PanelSnake extends JPanel {
 	/** Metodo para generar Comida **/
 	public void generarComida() {
 		boolean existe = false;
-		int x = (int)(Math.random()*cant);
-		int y = (int)(Math.random()*cant);
-		
+		int x;
+		int y;
+
+		// Si se selecciona el modo de juego con barreras se limita el area donde puede aparecer la comida
+		if(barreras){ 
+			x = (int)(Math.random()*(cant-2))+1; // genera numero entre 1 y cant-1
+			y = (int)(Math.random()*(cant-2))+1;
+		}else{
+			x = (int)(Math.random()*cant);
+			y = (int)(Math.random()*cant);
+		}
+
 		for(int [] par : snake) {
 			if(par[0] == x && par[1] == y) {
 				existe = true;   // -----------> Confirma que esa ubicacion ya existe par el snake
@@ -122,12 +132,13 @@ public class PanelSnake extends JPanel {
 		case "ab":agregarY = 1; break;
 		}
 
+		/*Si la serpiente se mueve fuera del tablero aparecerá del otro lado */
 		int[] newHeadSnake = { Math.floorMod  (headSnake[0] + agregarX, cant), Math.floorMod(headSnake[1] + agregarY, cant)};
 		
-		/** Busca si la nueva pocision pertenece a la pocision de la serpiente (perdiste) o sino avanza**/
+		/*Flag que indica que la serpiente chocó con la barrera*/
+		boolean b = false;
+		/* Busca si la nueva pocision pertenece a la pocision de la serpiente (perdiste) o sino avanza*/
 		boolean existe = false;
-
-		/* Determina si se alcanzó el tiempo límite */
 		boolean termino = false;
 
 		if(finalizaEfectoComida == true){
@@ -136,6 +147,16 @@ public class PanelSnake extends JPanel {
 			repaint();
 		}
 
+		
+		/*Si se selecciona el modo de juego con barreras se limita el area de juego */
+		if(barreras == true){
+			//int[] newHeadSnakeB = { headSnake[0] + agregarX, headSnake[1] + agregarY };
+
+			if (newHeadSnake[0] == 0 || newHeadSnake[0] >= cant-1 || newHeadSnake[1] == 0 || newHeadSnake[1] >= cant-1) {
+				b = true; // Si se choca con las barreras reinicia el juego
+			}
+		}
+		
 		if(Modos.timer.getTiempoInicial() == Modos.timer.getTiempoFinal()){
 			termino = true;
 		} 
@@ -147,17 +168,14 @@ public class PanelSnake extends JPanel {
 			}
 		}
 		
-		/*	Si existe, te chocaste contigo mismo, y se reinicia el snake y el puntaje
-		* 	Si termino el tiempo, se reinicia el snake y el puntaje
-		*/
-		if(existe || termino) { 
-			JOptionPane.showMessageDialog(this, "GameOver");
+		if(existe || termino || b) { // Si existe, te chocaste contigo mismo, y se reinicia el snake y el puntaje
+			JOptionPane.showMessageDialog(this, "Game Over");
 			inicioSnake();
 			JFrameSnake.lblPuntaje.setText(""+puntaje);
 			Modos.timer.reiniciarTimer();
 			Modos.lblTiempo.setText(""+Modos.timer.getInicial());
 			
-		}else {   // Si no existe ni terminó, puede ser la comida o espacio vacio
+		}else {   // Si no existe, puede ser la comida o espacio vacio
 			if(newHeadSnake[0]==comida[0] && newHeadSnake[1]==comida[1]) {
 				snake.add(newHeadSnake);
 				puntaje += tipoDeComida.getMultiplicador();
@@ -171,9 +189,7 @@ public class PanelSnake extends JPanel {
 			}
 		}
 
-		/*
-		 * Pregunta si pasó un segundo para actualizar el tiempo
-		 */
+		
 		if(calcTiempo() == true){
 			Modos.timer.modificarTiempo();
 			Modos.lblTiempo.setText(""+Modos.timer.getInicial());
@@ -192,11 +208,6 @@ public class PanelSnake extends JPanel {
 		
 	}
 	
-
-	/* 
-	 * Método que calcula el tiempo transcurrido desde el último segundo.
-	 * Si ha pasado un segundo, retorna true.
-	 */
 	public boolean calcTiempo(){
 		int newEpoc = (int)Instant.now().getEpochSecond();
 		int aumento = newEpoc - lastEpoch;
@@ -226,36 +237,10 @@ public class PanelSnake extends JPanel {
 		dirActual = "de";
 		dirNueva = "de";
 		puntaje = 0;
+		generarComida(); //cuando empieza el juego se genera la comida
+	}
+
+	public void setBarreras(){
+		barreras = true;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// asd

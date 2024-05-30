@@ -107,23 +107,13 @@ public class JFrameSnake extends JFrame implements KeyListener {
 				setVisible(true);
 				break;
 			case 2:
-				JOptionPane.showMessageDialog(null, "No se puede seleccionar");
-				System.exit(0);
+				fondo.setBarreras();
+				modo = new ConBordes(panelPrincipal,snake);
+				setVisible(true);
 				break;
 		}
 		
 	}
-/*
-	   private int PanelDeOpciones(){
-
-		String b[] = {"Normal","Contrarreloj","Con Bordes"};
-		return JOptionPane.showOptionDialog(null, this, "Opciones - Snake",
-		 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, b,null);
-
-
-	   }
-
- */
 
 	/** Boton para avanzar **/
 
