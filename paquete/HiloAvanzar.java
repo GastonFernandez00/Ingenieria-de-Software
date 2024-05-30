@@ -1,21 +1,24 @@
 package paquete;
 
+import java.awt.*;
+
 public class HiloAvanzar extends Thread{
 	
 	PanelSnake panel;
-	boolean estado = true;
+	public boolean estado = true;
 	
 	/** Constructor **/
-	HiloAvanzar(PanelSnake panel){
+	public HiloAvanzar(PanelSnake panel){
 		this.panel = panel;
 	}
 	
-	/** Mientras el estado sea verdadero continuará el snke **/
+	/** Mientras el estado sea verdadero continuarï¿½ el snke **/
 	public void run() {
 		
 		while(estado) {
 			panel.Avanzar();
 			panel.repaint();
+			Toolkit.getDefaultToolkit().sync();
 			
 			try {
 				Thread.sleep(150-3*PanelSnake.puntaje); // Aumentamos la velocidad con el puntaje

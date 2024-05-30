@@ -6,9 +6,9 @@ import javax.swing.JPanel;
 
 public class PanelFondo extends JPanel {
 
-	int tam;  // --> tamaño del lado del panel en pixeles
+	int tam;  // --> tamaï¿½o del lado del panel en pixeles
 	int cant; // --> cantidad de cuadrados por lado
-	int tamC; // --> tamaño de cada cuadrado en pixeles
+	int tamC; // --> tamaï¿½o de cada cuadrado en pixeles
 	
 	public PanelFondo(int tam, int cant) {
 		this.tam = tam;

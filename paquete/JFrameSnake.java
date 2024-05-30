@@ -12,6 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.Toolkit;
@@ -20,15 +22,17 @@ public class JFrameSnake extends JFrame implements KeyListener {
 
 	private JPanel contentPane;
 	public PanelSnake snake;
-	private JLabel lblNewLabel;
+	public JLabel lblNewLabel;
 	public static JLabel lblPuntaje;
+	private Menu menu;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
 					JFrameSnake frame = new JFrameSnake();
-					frame.setVisible(true);
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -40,8 +44,12 @@ public class JFrameSnake extends JFrame implements KeyListener {
 	 * Create the frame.
 	 */
 	public JFrameSnake() {
+		Modos modo;
+		Menu menu = new Menu();
+		int opcion = menu.getOpcion(); //guardo la opcion que me da en una variable
+
 		setIconImage(Toolkit.getDefaultToolkit().getImage(JFrameSnake.class.getResource("/img/snake.png")));
-		setTitle("Snake_Basilio");
+		setTitle("Snake - Game");
 		addKeyListener(this);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 575, 645);
@@ -49,6 +57,7 @@ public class JFrameSnake extends JFrame implements KeyListener {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+
 		
 		/** Panel Principal ----------------------------------------------------- */
 		JPanel panelPrincipal = new JPanel();
@@ -85,8 +94,37 @@ public class JFrameSnake extends JFrame implements KeyListener {
 		lblPuntaje.setFont(new Font("Consolas", Font.BOLD, 22));
 		lblPuntaje.setBounds(458, 15, 27, 20);
 		panelPrincipal.add(lblPuntaje);
+
+		//pregunto cual es la opcion y pongo el modo de juego seleccionado
+
+		switch (opcion) {
+			case 0:
+				modo = new Normal(panelPrincipal);
+				setVisible(true);
+				break;
+			case 1:
+				modo = new Contrarreloj(panelPrincipal);
+				setVisible(true);
+				break;
+			case 2:
+				JOptionPane.showMessageDialog(null, "No se puede seleccionar");
+				System.exit(0);
+				break;
+		}
 		
 	}
+/*
+	   private int PanelDeOpciones(){
+
+		String b[] = {"Normal","Contrarreloj","Con Bordes"};
+		return JOptionPane.showOptionDialog(null, this, "Opciones - Snake",
+		 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, b,null);
+
+
+	   }
+
+ */
+
 	/** Boton para avanzar **/
 
 	public void keyPressed(KeyEvent e) { // Evento en el JFrame
@@ -110,6 +148,11 @@ public class JFrameSnake extends JFrame implements KeyListener {
 			snake.cambiarDireccion("ab");
 		}
 	}
+
+    public Object getMenu() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getMenu'");
+    }
 }
 
 
@@ -131,5 +174,3 @@ public class JFrameSnake extends JFrame implements KeyListener {
 
 
 
-
-// aa
