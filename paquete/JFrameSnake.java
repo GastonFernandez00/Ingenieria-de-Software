@@ -46,6 +46,7 @@ public class JFrameSnake extends JFrame implements KeyListener {
 	public JFrameSnake() {
 		Contrarreloj contrarreloj;
 		Normal normal;
+		ConBordes bordes;
 		Menu menu = new Menu();
 		int opcion = menu.getOpcion(); //guardo la opcion que me da en una variable
 
@@ -108,23 +109,12 @@ public class JFrameSnake extends JFrame implements KeyListener {
 				setVisible(true);
 				break;
 			case 2:
-				JOptionPane.showMessageDialog(null, "No se puede seleccionar");
-				System.exit(0);
+				bordes = new ConBordes(panelPrincipal,snake);
+				setVisible(true);
 				break;
 		}
 		
 	}
-/*
-	   private int PanelDeOpciones(){
-
-		String b[] = {"Normal","Contrarreloj","Con Bordes"};
-		return JOptionPane.showOptionDialog(null, this, "Opciones - Snake",
-		 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, b,null);
-
-
-	   }
-
- */
 
 	/** Boton para avanzar **/
 
