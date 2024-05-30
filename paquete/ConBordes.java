@@ -9,4 +9,10 @@ public class ConBordes extends Modos{
         snake.setBarreras();
     }
 
+    @Override
+    public String getTipo() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getTipo'");
+    }
+    
 }

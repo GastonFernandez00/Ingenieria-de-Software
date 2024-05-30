@@ -66,9 +66,18 @@ public class PanelSnake extends JPanel {
 	/** Metodo para generar Comida **/
 	public void generarComida() {
 		boolean existe = false;
-		int x = (int)(Math.random()*cant);
-		int y = (int)(Math.random()*cant);
-		
+		int x;
+		int y;
+
+		// Si se selecciona el modo de juego con barreras se limita el area donde puede aparecer la comida
+		if(barreras){ 
+			x = (int)(Math.random()*(cant-2))+1; // genera numero entre 1 y cant-1
+			y = (int)(Math.random()*(cant-2))+1;
+		}else{
+			x = (int)(Math.random()*cant);
+			y = (int)(Math.random()*cant);
+		}
+
 		for(int [] par : snake) {
 			if(par[0] == x && par[1] == y) {
 				existe = true;   // -----------> Confirma que esa ubicacion ya existe par el snake
@@ -97,24 +106,23 @@ public class PanelSnake extends JPanel {
 		case "ab":agregarY = 1; break;
 		}
 
+		/*Si la serpiente se mueve fuera del tablero aparecerá del otro lado */
 		int[] newHeadSnake = { Math.floorMod  (headSnake[0] + agregarX, cant), Math.floorMod(headSnake[1] + agregarY, cant)};
 		
-		if(barreras == true){
-			int[] newHeadSnakeB = { headSnake[0] + agregarX, headSnake[1] + agregarY };
-
-			if (newHeadSnakeB[0] < 0 || newHeadSnakeB[0] >= cant || newHeadSnakeB[1] < 0 || newHeadSnakeB[1] >= cant) {
-				JOptionPane.showMessageDialog(this, "Game Over");
-				inicioSnake();
-				JFrameSnake.lblPuntaje.setText(""+puntaje);
-				Modos.timer.reiniciarTimer();
-				Modos.lblTiempo.setText(""+Modos.timer.getInicial());
-			}
-		}
-		
-
-		/** Busca si la nueva pocision pertenece a la pocision de la serpiente (perdiste) o sino avanza**/
+		/*Flag que indica que la serpiente chocó con la barrera*/
+		boolean b = false;
+		/* Busca si la nueva pocision pertenece a la pocision de la serpiente (perdiste) o sino avanza*/
 		boolean existe = false;
 		boolean termino = false;
+		
+		/*Si se selecciona el modo de juego con barreras se limita el area de juego */
+		if(barreras == true){
+			//int[] newHeadSnakeB = { headSnake[0] + agregarX, headSnake[1] + agregarY };
+
+			if (newHeadSnake[0] == 0 || newHeadSnake[0] >= cant-1 || newHeadSnake[1] == 0 || newHeadSnake[1] >= cant-1) {
+				b = true; // Si se choca con las barreras reinicia el juego
+			}
+		}
 		
 		if(Modos.timer.getTiempoInicial() == Modos.timer.getTiempoFinal()){
 			termino = true;
@@ -127,7 +135,7 @@ public class PanelSnake extends JPanel {
 			}
 		}
 		
-		if(existe || termino) { // Si existe, te chocaste contigo mismo, y se reinicia el snake y el puntaje
+		if(existe || termino || b) { // Si existe, te chocaste contigo mismo, y se reinicia el snake y el puntaje
 			JOptionPane.showMessageDialog(this, "Game Over");
 			inicioSnake();
 			JFrameSnake.lblPuntaje.setText(""+puntaje);
@@ -183,6 +191,7 @@ public class PanelSnake extends JPanel {
 		dirActual = "de";
 		dirNueva = "de";
 		puntaje = 0;
+		generarComida();
 	}
 
 	public void setBarreras(){
