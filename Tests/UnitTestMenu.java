@@ -1,8 +1,9 @@
 package Tests;
-import org.junit.jupiter.api.Test;
 import paquete.Menu;
 
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+
 
 class UnitTestMenu{
 
@@ -11,14 +12,18 @@ class UnitTestMenu{
         Menu menu = new Menu();
         int[] expected = {0, 1, 2}; // replace with the expected value
         int actual = menu.getOpcion();
-        assertEquals(expected, actual, "The method getOpcion did not return the expected value");
+        assertEquals(expected, actual,
+        "Se devolvió un valor diferente al esperado en getOpcion"+actual);
     }
 
-    private void assertEquals(int expected, int actual, String s) {
-        for(int i = 0; i < ; i++){
-            assertEquals(expected[i], actual[i], s);
+    private void assertEquals(int[] expected, int actual, String s) {
+        boolean found = false;
+        for(int i = 0; i < expected.length; i++){
+            if(expected[i] == actual){
+                found = true;
+                break;
+            }
         }
+        assertTrue(found, s);
     }
-
-    // Add more test methods as needed
 }

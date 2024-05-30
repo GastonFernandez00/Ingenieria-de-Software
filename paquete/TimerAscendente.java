@@ -5,14 +5,14 @@ package paquete;
  * El temporizador cuenta desde cero hasta un tiempo final predefinido.
  */
 public class TimerAscendente implements Timer {
-    final int tiempoFinal = -1;
-    int tiempoInicial = 0;
-    String tiempo = "0";
+    private final int tiempoFinal = -1;
+    private int tiempoInicial = 0;
+    private String tiempo = "0";
 
     /**
      * Crea una instancia de TimerAscendente.
      */
-    TimerAscendente(){}
+    public TimerAscendente(){}
 
     /**
      * Obtiene el tiempo inicial del temporizador.
@@ -34,7 +34,7 @@ public class TimerAscendente implements Timer {
      * Establece el tiempo inicial del temporizador.
      * @param inicial el tiempo inicial a establecer
      */
-    public void setTiempoInicial(int inicial){}
+    public void setTiempoInicial(Object inicial){}
 
     /**
      * Modifica el tiempo del temporizador incrementándolo en uno.

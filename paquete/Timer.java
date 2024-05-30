@@ -24,7 +24,7 @@ public interface Timer {
      * 
      * @param inicial el tiempo inicial del temporizador como un entero.
      */
-    public void setTiempoInicial(int inicial);
+    public void setTiempoInicial(Object inicial);
 
     /**
      * Modifica el tiempo del temporizador.

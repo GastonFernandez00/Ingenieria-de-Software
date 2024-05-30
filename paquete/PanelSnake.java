@@ -133,7 +133,6 @@ public class PanelSnake extends JPanel {
 		if(finalizaEfectoComida == true){
 			tipoDeComida = new CNegra();
 			finalizaEfectoComida = false;
-			//TODO: falta repintar el cuadro de comida
 			repaint();
 		}
 

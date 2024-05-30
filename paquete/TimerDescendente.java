@@ -1,26 +1,29 @@
 package paquete;
 
+import javax.swing.JOptionPane;
+
 /**
  * Esta clase representa un temporizador descendente.
  * Implementa la interfaz Timer.
  */
 public class TimerDescendente implements Timer{
-    final int tiempoFinal = 0;
-    int tiempoOriginal = 180;
-    String tiempo = "180";
-    int tiempoInicial = 180;
+    private final int tiempoFinal = 0;
+    private int tiempoOriginal = 180;
+    private String tiempo = "180";
+    private int tiempoInicial = 180;
 
     /**
      * Constructor por defecto de la clase TimerDescendente.
      */
-    TimerDescendente(){}
+    public TimerDescendente(){}
 
     /**
      * Constructor de la clase TimerDescendente que permite establecer un tiempo inicial personalizado.
      * @param inicial el tiempo inicial del temporizador
      */
-    TimerDescendente(int inicial){
-        tiempoOriginal = inicial;
+    public TimerDescendente(Object inicial){
+        if(!(inicial instanceof Integer)){return;}
+        tiempoOriginal = (int)inicial;
         setTiempoInicial(inicial);
     }
     
@@ -44,9 +47,18 @@ public class TimerDescendente implements Timer{
      * Establece el tiempo inicial del temporizador.
      * @param inicial el tiempo inicial del temporizador
      */
-    public void setTiempoInicial(int inicial){
-        tiempoInicial = inicial;
+    public void setTiempoInicial(Object inicial){
+        if(!(inicial instanceof Integer)){return;}
+        if((int)inicial < 30 || (int)inicial > 600){
+            JOptionPane.showMessageDialog(null, 
+            "El valor minimo es [30] segundos\n"+
+            "El valor maximo es [600] segundos", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        tiempoInicial = (int)inicial;
+        tiempoOriginal = (int)inicial;
         setInicial(""+inicial);
+        
     }
 
     /*
