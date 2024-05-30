@@ -9,7 +9,7 @@ public class testTimerAscendente {
     
     @Test
     void testGetInicial(){
-        TimerAscendente timer = new TimerAscendente();
+        Timer timer = new TimerAscendente();
         String expected = "0";
         String actual = timer.getInicial();
         assertEquals(expected, actual, "Se devolvio un valor diferente a '0'");
@@ -18,7 +18,7 @@ public class testTimerAscendente {
 
     @Test
     void testGetTiempoInicial(){
-        TimerAscendente timer = new TimerAscendente();
+        Timer timer = new TimerAscendente();
         int expected = 0;
         int actual = timer.getTiempoInicial();
         assertEquals(expected, actual, "Se devolvio un valor diferente a '0'");
@@ -26,7 +26,7 @@ public class testTimerAscendente {
 
     @Test
     void testSetTiempoInicial(){ 
-        TimerAscendente timer = new TimerAscendente();
+        Timer timer = new TimerAscendente();
         int expected = 0;
         timer.setTiempoInicial(5);
         int actual = timer.getTiempoInicial();
@@ -35,7 +35,7 @@ public class testTimerAscendente {
 
     @Test
     void testModificarTiempo(){
-        TimerAscendente timer = new TimerAscendente();
+        Timer timer = new TimerAscendente();
         int expected = 1;
         timer.modificarTiempo();
         int actual = timer.getTiempoInicial();
@@ -44,7 +44,7 @@ public class testTimerAscendente {
 
     @Test
     void testGetTiempoFinal(){
-        TimerAscendente timer = new TimerAscendente();
+        Timer timer = new TimerAscendente();
         int expected = -1;
         int actual = timer.getTiempoFinal();
         assertEquals(expected, actual, "El tiempo final no es -1");
@@ -52,7 +52,7 @@ public class testTimerAscendente {
 
     @Test
     void testReiniciarTimer(){
-        TimerAscendente timer = new TimerAscendente();
+        Timer timer = new TimerAscendente();
         for(int i = 0; i < 10; i++) timer.modificarTiempo();
         timer.reiniciarTimer();
         int expected = 0;
