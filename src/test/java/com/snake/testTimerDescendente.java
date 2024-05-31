@@ -1,6 +1,6 @@
-package Tests;
-import paquete.Timer;
-import paquete.TimerDescendente;
+package com.snake;
+import com.snake.Timer;
+import com.snake.TimerDescendente;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

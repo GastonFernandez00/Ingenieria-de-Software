@@ -1,4 +1,4 @@
-package paquete;
+package com.snake;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;

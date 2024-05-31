@@ -1,4 +1,4 @@
-package paquete;
+package com.snake;
 
 public class HiloAvanzar extends Thread{
 	
@@ -10,7 +10,7 @@ public class HiloAvanzar extends Thread{
 		this.panel = panel;
 	}
 	
-	/** Mientras el estado sea verdadero continuará el snke **/
+	/** Mientras el estado sea verdadero continuarï¿½ el snke **/
 	public void run() {
 		
 		while(estado) {

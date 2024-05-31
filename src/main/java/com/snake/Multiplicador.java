@@ -1,16 +1,19 @@
-package paquete;
+package com.snake;
 
 import java.awt.Color;
 
-public class None implements PowerUp {
-    
-    int aumentoVelocidad = 0;
-    int multiplicarPuntaje = 1;
+public class Multiplicador implements PowerUp{
+    int aumentoVelocidad = 10;
+    int multiplicarPuntaje = 4;
     int modificarTiempo = 0;
-    Color color = new Color(0, 1, 0);
+    Color color = new Color(150, 0, 0);
+
+    Multiplicador(){
+
+    }
 
     public String getTipo(){
-        return "Normal";
+        return "Multiplicador";
     }
 
     public void crear(){
