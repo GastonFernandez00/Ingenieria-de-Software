@@ -5,7 +5,7 @@ import com.snake.TimerDescendente;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class testTimerDescendente {
+public class TestTimerDescendente {
 
     @Test
     void testTimerDescendente_ConOffsetNormal(){
