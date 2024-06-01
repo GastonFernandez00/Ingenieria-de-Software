@@ -37,7 +37,7 @@ class MultiplicadorTest {
     }
 
     @Test
-    void testGetAumentoVelocidad() {
+    void GetAumentoVelocidad() {
         int expectedSpeedIncrease = 10;
         Mockito.when(multiplicador.getAumentoVelocidad()).thenReturn(expectedSpeedIncrease);
 
@@ -46,7 +46,7 @@ class MultiplicadorTest {
     }
 
     @Test
-    void testGetMultiplicarPuntaje() {
+    void GetMultiplicarPuntaje() {
         int expectedScoreMultiplier = 4;
         Mockito.when(multiplicador.getMultiplicarPuntaje()).thenReturn(expectedScoreMultiplier);
 
@@ -55,7 +55,7 @@ class MultiplicadorTest {
     }
 
     @Test
-    void testGetModificarTiempo() {
+    void GetModificarTiempo() {
        int expectedTimeModifier = 0;
         Mockito.when(multiplicador.getmodificarTiempo()).thenReturn(expectedTimeModifier);
 

@@ -36,7 +36,7 @@ class NoneTest {
     }
 
     @Test
-    void testGetAumentoVelocidad() {
+    void GetAumentoVelocidad() {
         int expectedSpeedIncrease = 0;
         Mockito.when(none.getAumentoVelocidad()).thenReturn(expectedSpeedIncrease);
 
@@ -45,7 +45,7 @@ class NoneTest {
     }
 
     @Test
-    void testGetMultiplicarPuntaje() {
+    void GetMultiplicarPuntaje() {
         int expectedScoreMultiplier = 1;
         Mockito.when(none.getMultiplicarPuntaje()).thenReturn(expectedScoreMultiplier);
 
@@ -54,7 +54,7 @@ class NoneTest {
     }
 
     @Test
-    void testGetModificarTiempo() {
+    void GetModificarTiempo() {
         int expectedTimeModifier = 0;
         Mockito.when(none.getmodificarTiempo()).thenReturn(expectedTimeModifier);
 
