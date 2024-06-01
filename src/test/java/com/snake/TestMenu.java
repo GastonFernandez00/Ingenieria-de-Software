@@ -1,11 +1,11 @@
-package Tests;
-import paquete.Menu;
+package com.snake;
+import com.snake.Menu;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-class UnitTestMenu{
+class TestMenu{
 
     @Test
     void testGetOpcion() {

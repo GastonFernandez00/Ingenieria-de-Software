@@ -1,4 +1,4 @@
-package paquete;
+package com.snake;
 
 /**
  * La interfaz Timer define los métodos necesarios para un temporizador.

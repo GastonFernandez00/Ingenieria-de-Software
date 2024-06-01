@@ -1,4 +1,4 @@
-package paquete;
+package com.snake;
 
 /**
  * Esta clase representa un temporizador ascendente que implementa la interfaz Timer.

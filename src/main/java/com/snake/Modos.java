@@ -1,4 +1,4 @@
-package paquete;
+package com.snake;
 
 import java.awt.Font;
 import javax.swing.JLabel;

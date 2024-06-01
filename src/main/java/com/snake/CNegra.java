@@ -1,4 +1,4 @@
-package paquete;
+package com.snake;
 
 public class CNegra extends Comidas{
     CNegra(){

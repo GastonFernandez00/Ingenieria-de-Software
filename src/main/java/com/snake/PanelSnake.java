@@ -1,4 +1,4 @@
-package paquete;
+package com.snake;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -136,7 +136,7 @@ public class PanelSnake extends JPanel {
 		int[] newHeadSnake = { Math.floorMod  (headSnake[0] + agregarX, cant), Math.floorMod(headSnake[1] + agregarY, cant)};
 		
 		/*Flag que indica que la serpiente chocó con la barrera*/
-		boolean b = false;
+		boolean choque = false;
 		/* Busca si la nueva pocision pertenece a la pocision de la serpiente (perdiste) o sino avanza*/
 		boolean existe = false;
 		boolean termino = false;
@@ -150,10 +150,9 @@ public class PanelSnake extends JPanel {
 		
 		/*Si se selecciona el modo de juego con barreras se limita el area de juego */
 		if(barreras == true){
-			//int[] newHeadSnakeB = { headSnake[0] + agregarX, headSnake[1] + agregarY };
 
 			if (newHeadSnake[0] == 0 || newHeadSnake[0] >= cant-1 || newHeadSnake[1] == 0 || newHeadSnake[1] >= cant-1) {
-				b = true; // Si se choca con las barreras reinicia el juego
+				choque = true; // Si se choca con las barreras reinicia el juego
 			}
 		}
 		
@@ -168,7 +167,7 @@ public class PanelSnake extends JPanel {
 			}
 		}
 		
-		if(existe || termino || b) { // Si existe, te chocaste contigo mismo, y se reinicia el snake y el puntaje
+		if(existe || termino || choque) { // Si existe, te chocaste contigo mismo, y se reinicia el snake y el puntaje
 			JOptionPane.showMessageDialog(this, "Game Over");
 			inicioSnake();
 			JFrameSnake.lblPuntaje.setText(""+puntaje);

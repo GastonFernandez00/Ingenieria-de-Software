@@ -1,4 +1,4 @@
-package paquete;
+package com.snake;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
