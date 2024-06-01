@@ -4,7 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.plaf.PanelUI;
 
 public class ConBordes extends Modos{
-    JPanel panelPrincipal;;
+    JPanel panelPrincipal;
     PanelSnake snake;
 
     public ConBordes(JPanel panelPrincipal, PanelSnake snake){
