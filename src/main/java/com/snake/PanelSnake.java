@@ -242,4 +242,24 @@ public class PanelSnake extends JPanel {
 	public void setBarreras(){
 		barreras = true;
 	}
+
+	public Integer getTam() {
+		// TODO Auto-generated method stub
+		return tam;
+	}
+    public Integer getCant() {
+        return cant;
+    }
+    public Integer getTamC() {
+        return tamC;
+    }
+    public Object geth1() {
+       return h1;
+    }
+    public Object gethilo() {
+       return hilo;
+    }
+	public Object getsnake() {
+        return snake;
+    }
 }
