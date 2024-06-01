@@ -142,6 +142,17 @@ public class JFrameSnake extends JFrame implements KeyListener {
 			snake.cambiarDireccion("ab");
 		}
 	}
+
+	public Object getMenu() {
+         return menu;
+    }
+	public Object getcontentPane() {
+      	 return contentPane;
+    }
+	public Object getlblNewLabel() {
+		return lblNewLabel;
+ 	}
+
 }
 
 
