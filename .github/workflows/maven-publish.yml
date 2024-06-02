@@ -6,12 +6,12 @@ name: Prueba Maven
 on:
   push:
     branches: 
-      main
-      Development
+    - main
+    - Development
   pull_request:
     branches:
-      main
-      Development
+    - main
+    - Development
 jobs:
   build:
 
