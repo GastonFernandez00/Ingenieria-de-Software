@@ -92,7 +92,7 @@ public class JFrameSnake extends JFrame implements KeyListener {
 		
 		lblPuntaje = new JLabel( "0" ); // <--------------- CONTADOR
 		lblPuntaje.setFont(new Font("Consolas", Font.BOLD, 22));
-		lblPuntaje.setBounds(458, 15, 27, 20);
+		lblPuntaje.setBounds(458, 15, 40, 20);
 		panelPrincipal.add(lblPuntaje);
 
 		//pregunto cual es la opcion y pongo el modo de juego seleccionado
