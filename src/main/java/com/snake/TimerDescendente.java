@@ -23,7 +23,6 @@ public class TimerDescendente implements Timer{
      */
     public TimerDescendente(Object inicial){
         if(!(inicial instanceof Integer)){return;}
-        tiempoOriginal = (int)inicial;
         setTiempoInicial(inicial);
     }
     
@@ -48,17 +47,18 @@ public class TimerDescendente implements Timer{
      * @param inicial el tiempo inicial del temporizador
      */
     public void setTiempoInicial(Object inicial){
-        if(!(inicial instanceof Integer)){return;}
-        if((int)inicial < 30 || (int)inicial > 600){
-            JOptionPane.showMessageDialog(null, 
-            "El valor minimo es [30] segundos\n"+
-            "El valor maximo es [600] segundos", "ERROR", JOptionPane.ERROR_MESSAGE);
-            return;
+        try{
+            if(!(inicial instanceof Integer) || (int)inicial < 30 || (int)inicial > 600){
+                throw new IllegalArgumentException("El tiempo inicial debe ser un entero");
+            }
+            tiempoInicial = (int)inicial;
+            tiempoOriginal = (int)inicial;
+            setInicial(""+inicial);
+    
         }
-        tiempoInicial = (int)inicial;
-        tiempoOriginal = (int)inicial;
-        setInicial(""+inicial);
-        
+        catch(IllegalArgumentException e){
+            System.out.println("Error: Valores incorrectos. El tiempo debe ser un entero entre 30 y 600");
+        }
     }
 
     /*

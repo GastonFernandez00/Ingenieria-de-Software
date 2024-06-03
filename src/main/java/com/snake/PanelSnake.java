@@ -74,6 +74,7 @@ public class PanelSnake extends JPanel {
 	}
 	/** Metodo para generar Comida **/
 	public void generarComida() {
+		contadorFinEfecto = 0;
 		boolean existe = false;
 		int x;
 		int y;
@@ -171,7 +172,6 @@ public class PanelSnake extends JPanel {
 			JOptionPane.showMessageDialog(this, "Game Over");
 			inicioSnake();
 			JFrameSnake.lblPuntaje.setText(""+puntaje);
-			Modos.timer.reiniciarTimer();
 			Modos.lblTiempo.setText(""+Modos.timer.getInicial());
 			
 		}else {   // Si no existe, puede ser la comida o espacio vacio
@@ -207,7 +207,7 @@ public class PanelSnake extends JPanel {
 		
 	}
 	
-	public boolean calcTiempo(){
+	private boolean calcTiempo(){
 		int newEpoc = (int)Instant.now().getEpochSecond();
 		int aumento = newEpoc - lastEpoch;
 		if(aumento < 1){
@@ -228,6 +228,7 @@ public class PanelSnake extends JPanel {
 		this.dirActual = this.dirNueva;
 	}
 	public void inicioSnake() {
+		Modos.timer.reiniciarTimer();
 		snake.clear();
 		int[] par1 = { (cant-1)/2, (cant-1)/2 };
 		int[] par2 = { ((cant-1)/2)+1  , (cant-1)/2 };
