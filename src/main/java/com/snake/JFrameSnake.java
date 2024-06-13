@@ -144,16 +144,16 @@ public class JFrameSnake extends JFrame implements KeyListener {
 	public void keyReleased(KeyEvent e) {}
 	public void keyTyped(KeyEvent e) {}
 	protected void keyPressedThis(KeyEvent e) {
-		if(e.getKeyCode() == KeyEvent.VK_D ) { // ambos devuelven int: el codigo de la tecla
+		if(e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) { // ambos devuelven int: el codigo de la tecla
 			snake.cambiarDireccion("de");
 		}
-		else if(e.getKeyCode() == KeyEvent.VK_A ) {
+		else if(e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT) {
 			snake.cambiarDireccion("iz");
 		}
-		else if(e.getKeyCode() == KeyEvent.VK_W ) {
+		else if(e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP) {
 			snake.cambiarDireccion("ar");
 		}
-		else if(e.getKeyCode() == KeyEvent.VK_S ) {
+		else if(e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN) {
 			snake.cambiarDireccion("ab");
 		}
 	}
