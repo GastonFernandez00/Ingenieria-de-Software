@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 import javax.swing.JPanel;
 
@@ -16,8 +15,8 @@ public class TestConBordes {
 
     @BeforeEach
     void setUp() {
-        panelPrincipal = mock(JPanel.class);
-        snake = mock(PanelSnake.class);
+        panelPrincipal = new JPanel();
+        snake = new PanelSnake(506,23);
         conBordes = new ConBordes(panelPrincipal, snake);
     }
 
