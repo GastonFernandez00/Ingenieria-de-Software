@@ -1,4 +1,4 @@
 .vscode/
-Makefile
-notas.txt
 target/
+notas.md
+Makefile

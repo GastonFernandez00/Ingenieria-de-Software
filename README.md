@@ -10,7 +10,7 @@
 + Trujillo, David
 + Venecia, Milagros Ailín
 
-<img src="img/snake_gif.gif" width="360" align="right" style="margin:10px" />
+<img src="src\main\resources\img\snake_gif.gif" width="360" align="right" style="margin:10px" />
 
 #### Acerca del Juego:
 - Se mueve con las teclas A,W,S,D.
@@ -23,3 +23,4 @@
 ---
 #### Nota :
 Este proyecto se desarrolló siguiendo este video https://youtu.be/Fh5fFE5h8tw pero agregando nuevas funcionalidades para mejorarlo.
+

@@ -1,21 +1,30 @@
-package paquete;
+package com.snake;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class PanelSnake extends JPanel {
 
-	int tam;  // --> tamaño del lado del panel en pixeles
+	boolean barreras = false;
+	int lastEpoch = (int)Instant.now().getEpochSecond();
+
+
+	boolean finalizaEfectoComida = false;
+	int contadorFinEfecto = 0;
+	int tam;  // --> tamaï¿½o del lado del panel en pixeles
 	int cant; // --> cantidad de cuadrados por lado
-	int tamC; // --> tamaño de cada cuadrado en pixeles
+	int tamC; // --> tamaï¿½o de cada cuadrado en pixeles
 	
 	List<int[]> snake = new ArrayList<>(); // --> SNAKE
 	int[] comida = new int [2];  // ------------> COMIDA
+	Comidas tipoDeComida = new CRoja();
 	
 	String dirActual = "de"; // --> Direccion a donde se esta moviendo el snake
 	String dirNueva = "de";   // --> Nueva Direccion que apretemos
@@ -30,7 +39,7 @@ public class PanelSnake extends JPanel {
 		this.tam = tam;
 		this.cant = cant;
 		this.tamC = tam / cant;
-		// Creamos dos pares ordenados que será el snake y se lo agregamos
+		// Creamos dos pares ordenados que serï¿½ el snake y se lo agregamos
 		inicioSnake();
 		
 		generarComida();
@@ -52,8 +61,12 @@ public class PanelSnake extends JPanel {
 			dibujo.fillRect(par[0]*tamC, par[1]*tamC, tamC-1, tamC-1);
 		}
 		// Dibujando la comida : esta compuesto de 4 cuadratitos (cube)
+		pintarComida(dibujo);
+	}
+
+	public void pintarComida(Graphics dibujo){
 		int cube = tamC/3;
-		dibujo.setColor(new Color(0, 1, 0));
+		dibujo.setColor(tipoDeComida.getColor());
 		dibujo.fillRect((comida[0]*tamC)+cube, comida[1]*tamC, cube, cube);
 		dibujo.fillRect((comida[0]*tamC), (comida[1]*tamC)+cube, cube, cube);
 		dibujo.fillRect((comida[0]*tamC)+2*cube, (comida[1]*tamC)+cube, cube, cube);
@@ -61,10 +74,20 @@ public class PanelSnake extends JPanel {
 	}
 	/** Metodo para generar Comida **/
 	public void generarComida() {
+		contadorFinEfecto = 0;
 		boolean existe = false;
-		int x = (int)(Math.random()*cant);
-		int y = (int)(Math.random()*cant);
-		
+		int x;
+		int y;
+
+		// Si se selecciona el modo de juego con barreras se limita el area donde puede aparecer la comida
+		if(barreras){ 
+			x = (int)(Math.random()*(cant-2))+1; // genera numero entre 1 y cant-1
+			y = (int)(Math.random()*(cant-2))+1;
+		}else{
+			x = (int)(Math.random()*cant);
+			y = (int)(Math.random()*cant);
+		}
+
 		for(int [] par : snake) {
 			if(par[0] == x && par[1] == y) {
 				existe = true;   // -----------> Confirma que esa ubicacion ya existe par el snake
@@ -73,6 +96,23 @@ public class PanelSnake extends JPanel {
 			}
 		}
 		if(!existe) {
+			Random r = new Random();
+
+			if(r.nextInt(1,101) < 20){
+				int i = r.nextInt(1,3);
+				switch (i) {
+					case 1:
+						break;
+					default:
+						tipoDeComida = new CRoja();
+						break;
+				}
+
+			}
+			else{
+				tipoDeComida = new CNegra();
+			}
+			
 			this.comida[0] = x;
 			this.comida[1] = y;
 		}
@@ -93,11 +133,34 @@ public class PanelSnake extends JPanel {
 		case "ab":agregarY = 1; break;
 		}
 
+		/*Si la serpiente se mueve fuera del tablero aparecerÃ¡ del otro lado */
 		int[] newHeadSnake = { Math.floorMod  (headSnake[0] + agregarX, cant), Math.floorMod(headSnake[1] + agregarY, cant)};
 		
-		/** Busca si la nueva pocision pertenece a la pocision de la serpiente (perdiste) o sino avanza**/
+		/*Flag que indica que la serpiente chocÃ³ con la barrera*/
+		boolean choque = false;
+		/* Busca si la nueva pocision pertenece a la pocision de la serpiente (perdiste) o sino avanza*/
 		boolean existe = false;
+		boolean termino = false;
+
+		if(finalizaEfectoComida == true){
+			tipoDeComida = new CNegra();
+			finalizaEfectoComida = false;
+			repaint();
+		}
+
 		
+		/*Si se selecciona el modo de juego con barreras se limita el area de juego */
+		if(barreras == true){
+
+			if (newHeadSnake[0] == 0 || newHeadSnake[0] >= cant-1 || newHeadSnake[1] == 0 || newHeadSnake[1] >= cant-1) {
+				choque = true; // Si se choca con las barreras reinicia el juego
+			}
+		}
+		
+		if(Modos.timer.getTiempoInicial() == Modos.timer.getTiempoFinal()){
+			termino = true;
+		} 
+
 		for(int i = 0; i<snake.size(); i++) {
 			if(newHeadSnake[0]==snake.get(i)[0] && newHeadSnake[1]==snake.get(i)[1] ) {
 				existe = true;
@@ -105,25 +168,55 @@ public class PanelSnake extends JPanel {
 			}
 		}
 		
-		if(existe) { // Si existe, te chocaste contigo mismo, y se reinicia el snake y el puntaje
-			JOptionPane.showMessageDialog(this, "GameOver");
+		if(existe || termino || choque) { // Si existe, te chocaste contigo mismo, y se reinicia el snake y el puntaje
+			JOptionPane.showMessageDialog(this, "Game Over");
 			inicioSnake();
 			JFrameSnake.lblPuntaje.setText(""+puntaje);
+			Modos.lblTiempo.setText(""+Modos.timer.getInicial());
 			
 		}else {   // Si no existe, puede ser la comida o espacio vacio
 			if(newHeadSnake[0]==comida[0] && newHeadSnake[1]==comida[1]) {
 				snake.add(newHeadSnake);
-				generarComida();
-				puntaje++;
+				puntaje += tipoDeComida.getMultiplicador();
 				JFrameSnake.lblPuntaje.setText(""+puntaje);
+				generarComida();
+				producirEfectoComida();
 				
 			}else {
 				snake.add(newHeadSnake);
 				snake.remove(0);
 			}
 		}
+
+		
+		if(calcTiempo() == true){
+			Modos.timer.modificarTiempo();
+			Modos.lblTiempo.setText(""+Modos.timer.getInicial());
+			
+			if(!tipoDeComida.getTipo().equals("Normal")) contadorFinEfecto++;
+			else contadorFinEfecto = 0;
+			if(contadorFinEfecto == 5){ //Tiempo para poder conseguir la "fruta"
+				finalizaEfectoComida = true;
+				contadorFinEfecto = 0;
+			}
+			
+		}
+	}
+
+	private void producirEfectoComida(){
+		
 	}
 	
+	private boolean calcTiempo(){
+		int newEpoc = (int)Instant.now().getEpochSecond();
+		int aumento = newEpoc - lastEpoch;
+		if(aumento < 1){
+			return false;
+		}
+		lastEpoch = newEpoc;
+		return true;
+	}
+
 	public void cambiarDireccion(String newDir) {
 		
 		if( (this.dirActual.equals("de") || this.dirActual.equals("iz")) && (newDir.equals("ar") || newDir.equals("ab")))
@@ -135,6 +228,7 @@ public class PanelSnake extends JPanel {
 		this.dirActual = this.dirNueva;
 	}
 	public void inicioSnake() {
+		Modos.timer.reiniciarTimer();
 		snake.clear();
 		int[] par1 = { (cant-1)/2, (cant-1)/2 };
 		int[] par2 = { ((cant-1)/2)+1  , (cant-1)/2 };
@@ -143,36 +237,30 @@ public class PanelSnake extends JPanel {
 		dirActual = "de";
 		dirNueva = "de";
 		puntaje = 0;
+		generarComida(); //cuando empieza el juego se genera la comida
 	}
+
+	public void setBarreras(){
+		barreras = true;
+	}
+
+	public Integer getTam() {
+		// TODO Auto-generated method stub
+		return tam;
+	}
+    public Integer getCant() {
+        return cant;
+    }
+    public Integer getTamC() {
+        return tamC;
+    }
+    public Object geth1() {
+       return h1;
+    }
+    public Object gethilo() {
+       return hilo;
+    }
+	public Object getsnake() {
+        return snake;
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// asd
