@@ -1,12 +1,12 @@
 package com.snake;
-import com.snake.Timer;
-import com.snake.TimerAscendente;
+
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestTimerAscendente {
     
+    //Comprueba que el tiempo con el que se inicia sea igual al tiempo inicial
     @Test
     void testGetInicial(){
         Timer timer = new TimerAscendente();
@@ -16,6 +16,7 @@ public class TestTimerAscendente {
 
     }
 
+    //Comprueba que el tiempo inicial sea 0
     @Test
     void testGetTiempoInicial(){
         Timer timer = new TimerAscendente();
@@ -24,6 +25,7 @@ public class TestTimerAscendente {
         assertEquals(expected, actual, "Se devolvio un valor diferente a '0'");
     }
 
+    //Comprueba que el tiempo no se haya modificado
     @Test
     void testSetTiempoInicial(){ 
         Timer timer = new TimerAscendente();
@@ -33,6 +35,7 @@ public class TestTimerAscendente {
         assertEquals(expected, actual, "El tiempo inicial se modifico!");
     }
 
+    //Comprueba que el tiempo se haya modificado
     @Test
     void testModificarTiempo(){
         Timer timer = new TimerAscendente();
@@ -42,6 +45,7 @@ public class TestTimerAscendente {
         assertEquals(expected, actual, "El tiempo no se modifico correctamente");
     }
 
+    //Comprueba que el tiempo final sea -1
     @Test
     void testGetTiempoFinal(){
         Timer timer = new TimerAscendente();
@@ -50,6 +54,7 @@ public class TestTimerAscendente {
         assertEquals(expected, actual, "El tiempo final no es -1");
     }
 
+    //Comprueba que el tiempo se reinicie correctamente
     @Test
     void testReiniciarTimer(){
         Timer timer = new TimerAscendente();

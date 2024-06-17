@@ -19,12 +19,14 @@ class ComidasTest {
         comidas = new Comidas(powerup) {}; // Comidas es abstracta, creamos una instancia anónima
     }
 
+    //Comparar si multiplicador de puntaje es igual al que se espera
     @Test
     void getMultiplicador() {
         Mockito.when(powerup.getMultiplicarPuntaje()).thenReturn(2);
         assertEquals(2, comidas.getMultiplicador());
     }
-
+    
+    //Comparar si el tipo de comida es igual al que se espera
     @Test
     void getTipo() {
         Mockito.when(powerup.getTipo()).thenReturn("tipoTest");
@@ -32,6 +34,7 @@ class ComidasTest {
         assertEquals("tipoTest", comidas.getTipo());
     }
 
+    //Comparar si el color de la comida es igual al que se espera
     @Test
     void getColor() {
         Color color = new Color(255, 0, 0);

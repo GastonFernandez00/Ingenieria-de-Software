@@ -15,6 +15,10 @@ public class Normal extends Modos {
         super(panelPrincipal,new TimerAscendente());
     }
 
+    /**
+     * Retorna el tipo de modo.
+     * @return el tipo de modo.
+     */
     public String getTipo(){
         return "Normal";
     }

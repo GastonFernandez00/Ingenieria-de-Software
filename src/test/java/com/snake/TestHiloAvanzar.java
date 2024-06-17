@@ -2,10 +2,7 @@
 package com.snake;
 
 import org.junit.jupiter.api.Test;
-import com.snake.HiloAvanzar;
-import com.snake.PanelSnake;
 
-//import paquete.HiloAvanzar;
 import static org.junit.jupiter.api.Assertions.*;
 class TestHiloAvanzar {
 

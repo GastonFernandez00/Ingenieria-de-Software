@@ -7,6 +7,7 @@ public class ConBordes extends Modos{
     JPanel panelPrincipal;
     PanelSnake snake;
 
+    // Constructor
     public ConBordes(JPanel panelPrincipal, PanelSnake snake){
         super(panelPrincipal, new TimerAscendente());
         this.panelPrincipal = panelPrincipal;
@@ -15,14 +16,17 @@ public class ConBordes extends Modos{
     }
 
     @Override
+    // Devuelve el tipo de modo de juego
     public String getTipo() {
         return "Con Bordes";
     }
     
+    // Devuelve el panel principal
     public JPanel getPanelPrincipal() {
         return panelPrincipal;
     }
 
+    // Devuelve la serpiente
     public PanelSnake getSnake() {
         return snake;
     }

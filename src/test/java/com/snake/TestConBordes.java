@@ -1,6 +1,5 @@
 package com.snake;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,16 +19,19 @@ public class TestConBordes {
         conBordes = new ConBordes(panelPrincipal, snake);
     }
 
+    //Comprueba que el panel principal no sea nulo
     @Test
     void testGetPanelPrincipal() {
         assertEquals(panelPrincipal, conBordes.getPanelPrincipal());
     }
 
+    //Comprueba que el panel snake no sea nulo
     @Test
     void testGetSnake() {
         assertEquals(snake, conBordes.getSnake());
     }
 
+    //Comprueba que el tipo sea "Con Bordes"
     @Test
     void testGetTipo() {
         assertEquals("Con Bordes", conBordes.getTipo());

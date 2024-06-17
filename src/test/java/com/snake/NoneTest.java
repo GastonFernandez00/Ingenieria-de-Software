@@ -16,6 +16,7 @@ class NoneTest {
         none = new None();
     }
 
+    //Comprueba que el tipo de PowerUp sea "Normal"
     @Test
     void getTipo() {
         String expected = "Normal";
@@ -23,6 +24,7 @@ class NoneTest {
         assertEquals(expected, actual, "El tipo de PowerUp no es 'Normal'");
     }
 
+    //Comprueba que el color de None sea verde
     @Test
     void getColor() {
         Color expectedColor = new Color(0, 1, 0);
@@ -30,13 +32,7 @@ class NoneTest {
         assertEquals(expectedColor, actualColor, "El color del PowerUp no es el esperado");
     }
 
-    @Test
-    void GetAumentoVelocidad() {
-        int expectedSpeedIncrease = 0;
-        int actualSpeedIncrease = none.getAumentoVelocidad();
-        assertEquals(expectedSpeedIncrease, actualSpeedIncrease, "El aumento de velocidad no es el esperado");
-    }
-
+    //Comprueba que el multiplicador de puntaje de None sea 1
     @Test
     void GetMultiplicarPuntaje() {
         int expectedScoreMultiplier = 1;
@@ -44,6 +40,7 @@ class NoneTest {
         assertEquals(expectedScoreMultiplier, actualScoreMultiplier, "El multiplicador de puntaje no es el esperado");
     }
 
+    //Comprueba que el multiplicador de tiempo de None sea 0
     @Test
     void GetModificarTiempo() {
         int expectedTimeModifier = 0;

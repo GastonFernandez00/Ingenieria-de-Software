@@ -17,8 +17,9 @@ class ContrarrelojTest {
         contrarreloj = new Contrarreloj(panel);
     }
 
+    // Comprueba que el modo de juego es Contrarreloj
     @Test
-void getTipo() {
+    void getTipo() {
     String expected = "Contrarreloj";
     String actual = contrarreloj.getTipo();
     assertEquals(expected, actual, "El tipo de modo no es 'Contrarreloj'");

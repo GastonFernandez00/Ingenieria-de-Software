@@ -14,6 +14,7 @@ class CNegraTest {
         cNegra = new CNegra();
     }
 
+    //Comprueba que el tipo de la casilla negra es "Normal"
     @Test
     void getTipo() {
         assertEquals("Normal", cNegra.getTipo());
