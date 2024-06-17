@@ -14,6 +14,7 @@ class CRojaTest {
         cRoja = new CRoja();
     }
 
+    //Comprueba que cRoja es del tipo correcto
     @Test
     void getTipo() {
         assertEquals("Multiplicador", cRoja.getTipo());

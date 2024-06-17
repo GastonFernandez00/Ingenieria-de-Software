@@ -25,6 +25,10 @@ public class Contrarreloj extends Modos {
         super(panelPrincipal,new TimerDescendente(TiempoInicial));
     }
 
+    /**
+     * Devuelve el tipo de modo de juego.
+     * @return el tipo de modo de juego
+     */
     public String getTipo(){
         return "Contrarreloj";
     }

@@ -6,21 +6,22 @@ import javax.swing.JPanel;
 
 public class PanelFondo extends JPanel {
 
+	// Flag de bareras
 	boolean barreras = false;
 
 	int tam;  // --> tama�o del lado del panel en pixeles
 	int cant; // --> cantidad de cuadrados por lado
 	int tamC; // --> tama�o de cada cuadrado en pixeles
 	
+	// Constructor
 	public PanelFondo(int tam, int cant) {
 		this.tam = tam;
 		this.cant = cant;
 		this.tamC = tam / cant;
-
 	}
 	
+	/* Dibuja el fondo con o sin barreras */
 	public void paint(Graphics dibujo) {
-		
 		super.paint(dibujo);
 		if(barreras) {
 			dibujarConBordes(dibujo);
@@ -29,6 +30,7 @@ public class PanelFondo extends JPanel {
 		}
 	}
 
+	// Dibuja el fondo sin bordes
 	private void dibujarSinBordes(Graphics dibujo) {
 		dibujo.setColor(new Color(114, 144, 7));
 		
@@ -39,6 +41,7 @@ public class PanelFondo extends JPanel {
 		}
 	}
 
+	// Dibuja el fondo con bordes
 	private void dibujarConBordes(Graphics dibujo) {
 		dibujo.setColor(new Color(114, 144, 7)); // Color verde
 		
@@ -55,6 +58,7 @@ public class PanelFondo extends JPanel {
 		}
 	}
 
+	// Levanta el flag de barreras
 	public void setBarreras(){
 		barreras = true;
 	}

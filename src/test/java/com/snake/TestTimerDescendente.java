@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestTimerDescendente {
 
+    // Test para el constructor por defecto
     @Test
     void testTimerDescendente_ConOffsetNormal(){
         Timer timer = new TimerDescendente(120);
@@ -15,6 +16,7 @@ public class TestTimerDescendente {
         assertEquals(Integer.toString(expected), actual_string,"El tiempo inicial es diferente de "+expected);
     }
 
+    // Test para el constructor por defecto
     @Test
     void testTimerDescendente_ConOffsetMinimo(){
         Timer timer = new TimerDescendente(0);
@@ -25,6 +27,7 @@ public class TestTimerDescendente {
         assertEquals(Integer.toString(expected), actual_string,"El tiempo inicial es diferente de "+expected);
     }
 
+    // Test para el constructor por defecto
     @Test
     void testTimerDescendente_ConOffsetMaximo(){
         Timer timer = new TimerDescendente(700);
@@ -35,6 +38,7 @@ public class TestTimerDescendente {
         assertEquals(Integer.toString(expected), actual_string,"El tiempo inicial es diferente de "+expected);
     }
 
+    // Test para el constructor por defecto
     @Test
     void testTimerDescendente_ConOffsetInvalido(){
         Timer timer = new TimerDescendente("hola");
@@ -45,6 +49,7 @@ public class TestTimerDescendente {
         assertEquals(Integer.toString(expected), actual_string,"El tiempo inicial es diferente de "+expected);
     }
 
+    //Comprueba que el tiempo inicial sea 180
     @Test
     void testGetInicial() {
         Timer timer = new TimerDescendente();
@@ -53,6 +58,7 @@ public class TestTimerDescendente {
         assertEquals(expected, actual,"El tiempo inicial es diferente de "+expected);
     }
 
+    //Comprueba que el tiempo inicial sea 180
     @Test
     void testGetTiempoInicial() {
         Timer timer = new TimerDescendente();
@@ -61,6 +67,7 @@ public class TestTimerDescendente {
         assertEquals(expected, actual,"El tiempo inicial es diferente de "+expected);
     }
 
+    //Comprueba que el tiempo inicial sea 120
     @Test
     void testSetTiempoInicial_ValorNormal() {
         Timer timer = new TimerDescendente();
@@ -73,6 +80,7 @@ public class TestTimerDescendente {
         assertEquals(Integer.toString(expected), actual_string,"El tiempo inicial es diferente de "+expected);
     }
 
+    //Comprueba que el tiempo inicial sea 180
     @Test
     void testSetTiempoInicial_ValorMinimo() {
         Timer timer = new TimerDescendente();
@@ -84,7 +92,8 @@ public class TestTimerDescendente {
         assertEquals(expected, actual,"El tiempo inicial es diferente de "+expected);
         assertEquals(Integer.toString(expected), actual_string,"El tiempo inicial es diferente de "+expected);
     }
-
+    
+    //Comprueba que el tiempo inicial sea 180
     @Test
     void testSetTiempoInicial_ValorMaximo() {
         Timer timer = new TimerDescendente();
@@ -97,6 +106,7 @@ public class TestTimerDescendente {
         assertEquals(Integer.toString(expected), actual_string,"El tiempo inicial es diferente de "+expected);
     }
 
+    //Comprueba que el tiempo inicial sea 180
     @Test
     void testSetTiempoInicial_ValorInvalido() {
         Timer timer = new TimerDescendente();
@@ -109,6 +119,7 @@ public class TestTimerDescendente {
         assertEquals(Integer.toString(expected), actual_string,"El tiempo inicial es diferente de "+expected);
     }
 
+    //Comprueba que el tiempo inicial sea 99
     @Test
     void testModificarTiempo(){
         Timer timer = new TimerDescendente(100);
@@ -121,6 +132,7 @@ public class TestTimerDescendente {
         assertEquals(Integer.toString(expected), actual_string,"El tiempo inicial es diferente de "+expected);
     }
 
+    //Comprueba que el tiempo final sea 0
     @Test
     void testGetTiempoFinal(){
         Timer timer = new TimerDescendente(100);
@@ -130,6 +142,7 @@ public class TestTimerDescendente {
         assertEquals(expected, actual,"El tiempo final es diferente de "+expected);
     }
 
+    //Comprueba que el tiempo inicial sea 100
     @Test
     void testReiniciarTimer(){
         Timer timer = new TimerDescendente(100);

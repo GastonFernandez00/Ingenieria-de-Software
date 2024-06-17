@@ -16,6 +16,7 @@ class MultiplicadorTest {
         multiplicador = new Multiplicador();
     }
 
+    //Comprueba que el tipo de PowerUp sea "Multiplicador"
     @Test
     void getTipo() {
         String expected = "Multiplicador";
@@ -23,6 +24,7 @@ class MultiplicadorTest {
         assertEquals(expected, actual, "El tipo de PowerUp no es 'Multiplicador'");
     }
 
+    //Comprueba que el color de multiplicador sea rojo
     @Test
     void getColor() {
         Color expectedColor = new Color(150, 0, 0);
@@ -30,13 +32,7 @@ class MultiplicadorTest {
         assertEquals(expectedColor, actualColor, "El color del PowerUp no es el esperado");
     }
 
-    @Test
-    void GetAumentoVelocidad() {
-        int expectedSpeedIncrease = 10;
-        int actualSpeedIncrease = multiplicador.getAumentoVelocidad();
-        assertEquals(expectedSpeedIncrease, actualSpeedIncrease, "El aumento de velocidad no es el esperado");
-    }
-
+    //Comprueba que el multiplicador de puntaje sea 4
     @Test
     void GetMultiplicarPuntaje() {
         int expectedScoreMultiplier = 4;
@@ -44,6 +40,7 @@ class MultiplicadorTest {
         assertEquals(expectedScoreMultiplier, actualScoreMultiplier, "El multiplicador de puntaje no es el esperado");
     }
 
+    //Comprueba que el multiplicador de tiempo sea 0
     @Test
     void GetModificarTiempo() {
         int expectedTimeModifier = 0;

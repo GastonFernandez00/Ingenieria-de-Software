@@ -17,6 +17,7 @@ class NormalTest {
         normal = new Normal(panel);
     }
 
+    //Comprueba que el tipo de modo es 'Normal'
     @Test
     void getTipo() {
         String expected = "Normal";

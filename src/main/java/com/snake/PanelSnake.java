@@ -142,6 +142,7 @@ public class PanelSnake extends JPanel {
 		boolean existe = false;
 		boolean termino = false;
 
+		/* Si terminó el tiempo asignado, la comida vuelve a ser CNegra */		
 		if(finalizaEfectoComida == true){
 			tipoDeComida = new CNegra();
 			finalizaEfectoComida = false;
@@ -153,60 +154,76 @@ public class PanelSnake extends JPanel {
 		if(barreras == true){
 
 			if (newHeadSnake[0] == 0 || newHeadSnake[0] >= cant-1 || newHeadSnake[1] == 0 || newHeadSnake[1] >= cant-1) {
-				choque = true; // Si se choca con las barreras reinicia el juego
+				// Si se choca con las barreras levanta un flag
+				choque = true; 
 			}
 		}
 		
+		// Pregunta si el tiempo actual es igual al final. Si es asi, termino el juego
 		if(Modos.timer.getTiempoInicial() == Modos.timer.getTiempoFinal()){
+			// Si se termina el tiempo, levanta un flag
 			termino = true;
 		} 
 
+		// Pregunta si la nueva cabeza del snake es igual a alguna parte del snake
 		for(int i = 0; i<snake.size(); i++) {
 			if(newHeadSnake[0]==snake.get(i)[0] && newHeadSnake[1]==snake.get(i)[1] ) {
 				existe = true;
 				break;
 			}
 		}
-		
-		if(existe || termino || choque) { // Si existe, te chocaste contigo mismo, y se reinicia el snake y el puntaje
+
+		/* Si te chocaste contra la barrera, contigo mismo ó terminó el tiempo
+		 * se termina el juego, se muestra el puntaje obtenido y reinicia.
+		 */
+		if(existe || termino || choque) {
 			JOptionPane.showMessageDialog(this, "Game Over");
 			inicioSnake();
 			JFrameSnake.lblPuntaje.setText(""+puntaje);
 			Modos.lblTiempo.setText(""+Modos.timer.getInicial());
-			
-		}else {   // Si no existe, puede ser la comida o espacio vacio
+		}
+		/* Si no ocurre nada de esto, puede ser comida, ó un espacio vacío */
+		else{
 			if(newHeadSnake[0]==comida[0] && newHeadSnake[1]==comida[1]) {
+				/*	Si la nueva cabeza del snake es igual a la comida, se come la comida
+				 * y se genera una nueva comida
+				 */
 				snake.add(newHeadSnake);
 				puntaje += tipoDeComida.getMultiplicador();
 				JFrameSnake.lblPuntaje.setText(""+puntaje);
 				generarComida();
-				producirEfectoComida();
 				
-			}else {
+			}
+			else { //Es simplemente un espacio vacio
 				snake.add(newHeadSnake);
 				snake.remove(0);
 			}
 		}
 
-		
+		/* Si ha pasado 1 segundo, actualiza el tiempo */
 		if(calcTiempo() == true){
 			Modos.timer.modificarTiempo();
 			Modos.lblTiempo.setText(""+Modos.timer.getInicial());
 			
+			/*
+			 * Si la comida es de tipo "Normal" no se hace nada, sino se aumenta el contador
+			 * para que la comida vuelva a ser "Normal" luego de 5 segundos.
+			 */
 			if(!tipoDeComida.getTipo().equals("Normal")) contadorFinEfecto++;
 			else contadorFinEfecto = 0;
-			if(contadorFinEfecto == 5){ //Tiempo para poder conseguir la "fruta"
+			
+			// Pregunta si ya pasó el tiempo en que se podía conseguir la comida especial
+			if(contadorFinEfecto == 5){ 
 				finalizaEfectoComida = true;
 				contadorFinEfecto = 0;
 			}
-			
 		}
 	}
 
-	private void producirEfectoComida(){
-		
-	}
-	
+	/* 
+	 * Calcula el tiempo transcurrido. Si es menor a 1 segundo, retorna false
+	 * sino, retorna true y actualiza el tiempo 
+	 */
 	private boolean calcTiempo(){
 		int newEpoc = (int)Instant.now().getEpochSecond();
 		int aumento = newEpoc - lastEpoch;
@@ -217,6 +234,7 @@ public class PanelSnake extends JPanel {
 		return true;
 	}
 
+	// Cambia la direccion a una nueva
 	public void cambiarDireccion(String newDir) {
 		
 		if( (this.dirActual.equals("de") || this.dirActual.equals("iz")) && (newDir.equals("ar") || newDir.equals("ab")))
@@ -224,9 +242,17 @@ public class PanelSnake extends JPanel {
 		if( (this.dirActual.equals("ar") || this.dirActual.equals("ab")) && (newDir.equals("de") || newDir.equals("iz")))
 			this.dirNueva = newDir;
 	}
+
+	// Establece que la direccion actual es igual a la nueva
 	public void igualarDireccion() {
 		this.dirActual = this.dirNueva;
 	}
+	
+	/*
+	 * 	Al iniciar el snake, se re-establece el timer, se vacía el snake, se reubica y
+	 * su puntaje se establece en 0. 
+	 * 	Además se genera una nueva comida.
+	 */
 	public void inicioSnake() {
 		Modos.timer.reiniciarTimer();
 		snake.clear();
@@ -237,30 +263,11 @@ public class PanelSnake extends JPanel {
 		dirActual = "de";
 		dirNueva = "de";
 		puntaje = 0;
-		generarComida(); //cuando empieza el juego se genera la comida
+		generarComida();
 	}
 
+	// Establece el flag para que se generen las barreras.
 	public void setBarreras(){
 		barreras = true;
 	}
-
-	public Integer getTam() {
-		// TODO Auto-generated method stub
-		return tam;
-	}
-    public Integer getCant() {
-        return cant;
-    }
-    public Integer getTamC() {
-        return tamC;
-    }
-    public Object geth1() {
-       return h1;
-    }
-    public Object gethilo() {
-       return hilo;
-    }
-	public Object getsnake() {
-        return snake;
-    }
 }

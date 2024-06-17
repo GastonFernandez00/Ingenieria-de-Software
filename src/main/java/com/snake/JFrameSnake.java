@@ -43,8 +43,7 @@ public class JFrameSnake extends JFrame implements KeyListener {
 	public JFrameSnake() {
 		Modos modo;
 		menu = new Menu();
-		int opcion = menu.getOpcion(); //guardo la opcion que me da en una variable
-
+		int opcion = menu.getOpcion(); //Guardo la opcion que me da en una variable
 
 		setupFrame();
 		setupContentPane();
@@ -81,7 +80,7 @@ public class JFrameSnake extends JFrame implements KeyListener {
 		
 	}
 
-
+	//Se configura el frame principal
 	private void setupFrame() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(JFrameSnake.class.getResource("/img/snake.png")));
 		setTitle("Snake - Game");
@@ -90,6 +89,7 @@ public class JFrameSnake extends JFrame implements KeyListener {
 		setBounds(100, 100, 575, 645);
 	}
 
+	//Se configura el contenedor principal de la interfaz gráfica
 	private void setupContentPane() {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -97,6 +97,7 @@ public class JFrameSnake extends JFrame implements KeyListener {
 		contentPane.setLayout(null);
 	}
 
+	//Se configura el panel principal
 	private JPanel setupPanelPrincipal() {
 		JPanel panelPrincipal = new JPanel();
 		panelPrincipal.setBackground(new Color(100, 130, 2));
@@ -106,6 +107,7 @@ public class JFrameSnake extends JFrame implements KeyListener {
 		return panelPrincipal;
 	}
 
+	//Se configura la vibo de la serpiente
 	private void setupSnakePanel(JPanel panelPrincipal) {
 		snake = new PanelSnake(506,23);
 		panelPrincipal.add(snake);
@@ -114,6 +116,7 @@ public class JFrameSnake extends JFrame implements KeyListener {
 		snake.setOpaque(false);
 	}
 
+	//Se configura el panel de fondo
 	private void setupFondoPanel(JPanel panelPrincipal) {
 		fondo = new PanelFondo(506,23); // 506 pixeles de lado y 23 cuadrados de lado
 		panelPrincipal.add(fondo);
@@ -122,6 +125,7 @@ public class JFrameSnake extends JFrame implements KeyListener {
 		fondo.setOpaque(false);
 	}
 
+	//Se configura el panel de puntaje
 	private void setupPuntajeLabel(JPanel panelPrincipal) {
 		lblNewLabel = new JLabel("Puntaje :");
 		lblNewLabel.setFont(new Font("Consolas", Font.BOLD, 22));
@@ -157,17 +161,6 @@ public class JFrameSnake extends JFrame implements KeyListener {
 			snake.cambiarDireccion("ab");
 		}
 	}
-
-	public Object getMenu() {
-         return menu;
-    }
-	public Object getcontentPane() {
-      	 return contentPane;
-    }
-	public Object getlblNewLabel() {
-		return lblNewLabel;
- 	}
-
 }
 
 

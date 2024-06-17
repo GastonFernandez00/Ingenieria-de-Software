@@ -33,10 +33,4 @@ public abstract class Modos {
     }
 
     public abstract String getTipo();
-
-
-    // void establecerBarreras(Barreras barr){
-    //     this.barr = barr;
-    // }
-
 }
